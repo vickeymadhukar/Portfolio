@@ -55,7 +55,7 @@ const Contact = () => {
 
           {/* DOWNLOAD CV */}
           <a
-            href="/resume.pdf"
+            href="/webdevresume.pdf"
             download
             className="inline-block mt-6 px-6 py-3 border border-zinc-400 rounded-full text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-black transition-all shadow-lg"
           >
