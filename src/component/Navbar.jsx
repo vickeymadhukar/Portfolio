@@ -1,95 +1,91 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { IoMdHome, IoMdPerson, IoMdMail, IoMdContact } from 'react-icons/io';
+import React, { useState, useEffect } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
 
+const navItems = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+];
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
-  const linkClass = ({ isActive }) =>
-    isActive ? 'text-zinc-500' : 'hover:text-zinc-400';
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      const sections = navItems.map(item => item.href.replace('#', ''));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 150) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollTo = (e, href) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <header className="fixed z-100 md:w-full w-full text-white">
-      <nav className="bg-transparent md:h-[70px] flex items-center justify-between md:px-40 px-6 py-4 shadow-md">
-        {/* Logo */}
-        <div className="text-2xl font-bold">Vikas Madhukar</div>
+    <>
+      <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <div className="navbar-inner">
+          <div className="nav-logo" onClick={(e) => scrollTo(e, '#home')}>
+            VM<span style={{ color: 'var(--accent-cyan)' }}>.</span>
+          </div>
 
-        {/* Hamburger (Mobile only) */}
-        <button
-          className="md:hidden text-3xl"
-          onClick={() => setMenuOpen(true)}
-        >
-          <GiHamburgerMenu />
-        </button>
+          <ul className="nav-links">
+            {navItems.map(item => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className={activeSection === item.href.replace('#', '') ? 'active' : ''}
+                  onClick={(e) => scrollTo(e, item.href)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-10 text-lg font-medium">
-          <li>
-            <NavLink to="/" className={linkClass}>
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/Works" className={linkClass}>
-              Work
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/skills" className={linkClass}>
-              Skills
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact" className={linkClass}>
-      Contact
-            </NavLink>
-          </li>
-
-        </ul>
-      </nav>
-
-      {/* Mobile Slide Menu */}
-      <div
-        className={`fixed top-0 left-0 w-[70%] h-full bg-black text-white z-40 transform transition-transform duration-300 ease-in-out ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700">
-          <div className="text-xl text-white font-bold">Menu</div>
-          <button onClick={() => setMenuOpen(false)} className="text-2xl">
-            <IoMdClose />
+          <button className="nav-toggle" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            <GiHamburgerMenu />
           </button>
         </div>
-        <ul className="flex flex-col gap-6 p-6 text-lg font-medium">
-          <li onClick={() => setMenuOpen(false)} className="flex items-center gap-2">
-            <IoMdHome />
-            <NavLink to="/" className={linkClass}>
-              About
-            </NavLink>
-          </li>
-          <li onClick={() => setMenuOpen(false)} className="flex items-center gap-2">
-            <IoMdPerson />
-            <NavLink to="/Works" className={linkClass}>
-              Work
-            </NavLink>
-          </li>
-          <li onClick={() => setMenuOpen(false)} className="flex items-center gap-2">
-            <IoMdMail />
-            <NavLink to="/skills" className={linkClass}>
-              Skills
-            </NavLink>
-          </li>
-           <li onClick={() => setMenuOpen(false)} className="flex items-center gap-2">
-            <IoMdContact />
-            <NavLink to="/contact" className={linkClass}>
-              Contact
-            </NavLink>
-          </li>
-        </ul>
+      </header>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        <button className="mobile-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+          <IoMdClose />
+        </button>
+        {navItems.map(item => (
+          <a
+            key={item.href}
+            href={item.href}
+            onClick={(e) => scrollTo(e, item.href)}
+          >
+            {item.label}
+          </a>
+        ))}
       </div>
-    </header>
+    </>
   );
 };
 

@@ -1,72 +1,96 @@
-import React, { useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
+import { useScrollReveal } from '../useScrollReveal';
+import Marquee from './Marquee';
 
-gsap.registerPlugin(ScrollTrigger);
+const D = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
 
-const skills = [
-  'Game Development',
-  'Unity',
-  'C#',
-  'C++',
-  'Game Designer',
-  'UI/UX Designer',
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'Web Development',
-  'React',
-  'Tailwind CSS',
-  'Node.js',
-  'GSAP',
-  'AR/VR/MR',
-  'Animation',
-  'MongoDB',
- 
+const row1 = [
+  { name: 'React',       img: `${D}/react/react-original.svg` },
+  { name: 'JavaScript',  img: `${D}/javascript/javascript-original.svg` },
+  { name: 'Node.js',     img: `${D}/nodejs/nodejs-original.svg` },
+  { name: 'Unity',       img: `${D}/unity/unity-original.svg` },
+  { name: 'C#',          img: `${D}/csharp/csharp-original.svg` },
+  { name: 'HTML5',       img: `${D}/html5/html5-original.svg` },
+  { name: 'CSS3',        img: `${D}/css3/css3-original.svg` },
+  { name: 'GSAP',        img: null, emoji: '✨' },
+];
+
+const row2 = [
+  { name: 'Figma',       img: `${D}/figma/figma-original.svg` },
+  { name: 'MongoDB',     img: `${D}/mongodb/mongodb-original.svg` },
+  { name: 'Git',         img: `${D}/git/git-original.svg` },
+  { name: 'GitHub',      img: `${D}/github/github-original.svg` },
+  { name: 'Tailwind',    img: `${D}/tailwindcss/tailwindcss-original.svg` },
+  { name: 'C++',         img: `${D}/cplusplus/cplusplus-original.svg` },
+  { name: 'VS Code',     img: `${D}/vscode/vscode-original.svg` },
+  { name: 'Blender',     img: `${D}/blender/blender-original.svg` },
+];
+
+const skillCards = [
+  {
+    title: 'Game Development',
+    icon: '🎮',
+    skills: ['Unity', 'C#', 'C++', 'Photon', 'AR/VR', 'Game Design'],
+    color: '#7c3aed',
+  },
+  {
+    title: 'Web Frontend',
+    icon: '⚛️',
+    skills: ['React', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind', 'GSAP'],
+    color: '#06b6d4',
+  },
+  {
+    title: 'Web Backend',
+    icon: '🟩',
+    skills: ['Node.js', 'Express', 'MongoDB', 'REST API'],
+    color: '#10b981',
+  },
+  {
+    title: 'Design & Tools',
+    icon: '🎨',
+    skills: ['Figma', 'UI/UX', 'Git', 'GitHub', 'Photoshop'],
+    color: '#ec4899',
+  },
 ];
 
 export default function Skills() {
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.main-section',
-        pin: true,
-        start: '50% 50%',
-        end: '300% 50%',
-        scrub: true,
-      },
-    });
-
-    skills.forEach((skill, index) => {
-      const id = skill.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-      tl.to(`#${id}`, {
-        opacity: 1,
-        filter: 'blur(0px)',
-        delay: index === 0 ? 0 : -0.3,
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  const sectionRef = useScrollReveal();
 
   return (
-    <div className="w-full min-h-screen  text-white font-poppins" style={{
-        backgroundImage: "linear-gradient(-120deg, #211c31 , #000 )",
-      }}>
-      {/* Skills Section */}
-      <div className="main-section flex flex-col items-center justify-center min-h-screen px-4 py-10">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-10">SKILLS</h2>
-        <div className="flex flex-wrap gap-4 w-full max-w-6xl justify-center">
-          {skills.map(skill => (
-            <h2
-              key={skill}
-              id={skill.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()}
-              className="px-5 py-2 text-base sm:text-lg md:text-xl border border-white rounded-full font-normal opacity-0 blur-sm transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]"
+    <div ref={sectionRef} style={{ paddingTop: '100px', paddingBottom: '100px', overflow: 'hidden' }}>
+      {/* Header */}
+      <div className="section-container" style={{ paddingTop: 0, paddingBottom: '48px' }}>
+        <div className="reveal-item">
+          <span className="section-label">My Skills</span>
+          <h2 className="section-title">
+            Technologies I <span className="gradient-text">Work With</span>
+          </h2>
+        </div>
+      </div>
+
+      {/* Marquee Row 1 — left */}
+      <Marquee items={row1} direction="left" speed={40} />
+
+      {/* Marquee Row 2 — right */}
+      <Marquee items={row2} direction="right" speed={35} className="marquee-row-2" />
+
+      {/* Skill Category Cards */}
+      <div className="section-container" style={{ paddingTop: '60px', paddingBottom: 0 }}>
+        <div className="skill-cards-grid">
+          {skillCards.map((card) => (
+            <div
+              key={card.title}
+              className="skill-cat-card glass-card reveal-item"
+              style={{ '--card-accent': card.color }}
             >
-              {skill}
-            </h2>
+              <div className="skill-cat-icon">{card.icon}</div>
+              <h3 className="skill-cat-title">{card.title}</h3>
+              <div className="skill-cat-tags">
+                {card.skills.map(s => (
+                  <span key={s} className="skill-cat-tag">{s}</span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

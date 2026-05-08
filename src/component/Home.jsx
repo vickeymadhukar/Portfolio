@@ -2,87 +2,135 @@ import React, { useRef, useEffect } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import VanillaTilt from 'vanilla-tilt';
 import Social from './Social';
-import Works from './Works';
-import Skills from './Skills';
-import Worksection from './Worksection';
-
+import { FaDownload, FaArrowDown } from 'react-icons/fa';
+import gsap from 'gsap';
 
 const Home = () => {
   const tiltRef = useRef(null);
+  const nameRef = useRef(null);
+  const textRef = useRef(null);
+  const heroRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
+    // Tilt on image
     if (tiltRef.current) {
       VanillaTilt.init(tiltRef.current, {
-        max: 25,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.3,
-        scale: 1.05,
+        max: 10, speed: 400, glare: true, 'max-glare': 0.15, scale: 1.02,
       });
     }
+
+    // Hero entrance — triggered after preloader
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.2 });
+
+      tl.from('.hero-greeting', { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' })
+        .from('.hero-name', { y: 60, opacity: 0, duration: 0.9, ease: 'power4.out' }, '-=0.4')
+        .from('.hero-role', { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+        .from('.hero-desc', { y: 20, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+        .from('.hero-actions', { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+        .from('.hero-socials', { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+        .from('.hero-image-wrapper', { x: 60, opacity: 0, duration: 1, ease: 'power3.out' }, '-=1.2')
+        .from(scrollRef.current, { opacity: 0, duration: 0.5 }, '-=0.2');
+    }, heroRef);
+
+    // Scroll indicator spin
+    if (scrollRef.current) {
+      gsap.to(scrollRef.current.querySelector('.scroll-text'), {
+        rotation: 360, duration: 10, ease: 'none', repeat: -1,
+      });
+    }
+
+    return () => ctx.revert();
   }, []);
 
-  return (
+  const scrollToAbout = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-    <>
-      <div className="w-full h-screen bg-[#2]  flex items-center justify-center px-6 z-50 relative" style={{
-        backgroundImage: "linear-gradient(-120deg, #211c31 , #000 )",
-      }}>
-        <div className="relative max-w-6xl w-full flex  md:flex-row flex-col-reverse items-center justify-between gap-12">
-          <div className="text-center  mb-[10%] md:text-left">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight">
-              I am <span className="text-white drop-shadow-md">Vikas Madhukar</span>
-            </h1>
-            <p className="mt-4 text-xl md:text-5xl text-[#b9b2b2] font-semibold italic">
+  return (
+    <div className="hero-section" ref={heroRef} style={{ overflow: 'hidden' }}>
+      {/* Floating Orbs */}
+      <div className="floating-orb orb-1"></div>
+      <div className="floating-orb orb-2"></div>
+
+      {/* Grain overlay */}
+      <div className="grain-overlay" aria-hidden="true" />
+
+      <div className="hero-content">
+        {/* Text Side */}
+        <div className="hero-text">
+          <p className="hero-greeting" ref={textRef}>
+            <span style={{ fontSize: '1.2rem' }}>👋</span>&nbsp; Hello World, I'm
+          </p>
+          <h1 className="hero-name" ref={nameRef}>
+            <span className="gradient-text">Vikas</span>{' '}
+            <span style={{ color: 'white' }}>Madhukar</span>
+          </h1>
+          <div className="hero-role">
+            <span style={{ color: 'var(--text-secondary)' }}>
               <Typewriter
-                words={['Game Developer', 'Game Designer', 'Web developer', 'ui/ux designer']}
+                words={['Game Developer', 'Web Developer', 'UI/UX Designer', 'Game Designer', 'Creative Coder']}
                 loop={true}
                 cursor
-                cursorStyle="_"
-                typeSpeed={70}
-                deleteSpeed={70}
-                delaySpeed={1000}
+                cursorStyle="|"
+                typeSpeed={65}
+                deleteSpeed={40}
+                delaySpeed={1800}
               />
-            </p>
-
-            <div className='absolute   w-[50%] h-[20%] bg-transparent text-white mt-4'>
-              <p className='hidden md:block'>
-                I’m a passionate and creative developer specializing in game development and web development, with a strong interest in building immersive and interactive digital experiences. Whether it's developing intense multiplayer FPS games using Unity and Photon, designing eerie environments for horror games, or crafting modern, responsive web interfaces with React, Tailwind, and Node.js, I love turning ideas into engaging user experiences.
-              </p>
-
-              <Social />
-
-            </div>
-
-
+            </span>
           </div>
-
-
-          <div
-            ref={tiltRef}
-            className="md:w-130 md:h-130 w-[370px] h-[400px] top-6 relative ml-7 mr-7 bg-black shadow-lg rounded-2xl border-4 overflow-hidden flex items-center justify-center myimage group"
-            data-tilt
-            data-tilt-scale="1.1"
-            style={{ perspective: '1000px', transformStyle: 'preserve-3d' }} // 👈 necessary for 3D
-          >
-            <img
-              src="./vikas.png"
-              alt="Vikas Madhukar"
-              className="md:w-85 md:h-240 h-[770px] w-[300px] pt-50   md:pt-57"
-              style={{ backfaceVisibility: 'hidden' }}
-            />
-
-          
+          <p className="hero-desc">
+            Building immersive games with Unity and crafting modern web experiences with React & Node.js.
+            Passionate about turning creative ideas into engaging digital products.
+          </p>
+          <div className="hero-actions">
+            <a
+              href="#projects"
+              className="glow-btn"
+              onClick={(e) => { e.preventDefault(); document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' }); }}
+            >
+              View Projects
+            </a>
+            <a
+              href="/vikasMadhukarResume.pdf"
+              download
+              className="glow-btn"
+              style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.15)' }}
+            >
+              <FaDownload size={13} /> Resume
+            </a>
           </div>
-
+          <div className="hero-socials" style={{ marginTop: '32px' }}>
+            <Social />
+          </div>
         </div>
 
-
-
+        {/* Image Side */}
+        <div className="hero-image-wrapper">
+          <div className="hero-image-glow"></div>
+          <div className="hero-image-container" ref={tiltRef} data-tilt>
+            <img src="/vikas.png" alt="Vikas Madhukar" />
+          </div>
+        </div>
       </div>
 
-
-    </>
+      {/* Scroll Indicator */}
+      <button
+        ref={scrollRef}
+        onClick={scrollToAbout}
+        className="scroll-indicator"
+        aria-label="Scroll down"
+      >
+        <svg viewBox="0 0 100 100" className="scroll-text">
+          <path id="circlePath" d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0" fill="none" />
+          <text fontSize="10.5" fill="rgba(255,255,255,0.5)" letterSpacing="3">
+            <textPath href="#circlePath">SCROLL DOWN • SCROLL DOWN • </textPath>
+          </text>
+        </svg>
+        <FaArrowDown className="scroll-arrow" />
+      </button>
+    </div>
   );
 };
 
