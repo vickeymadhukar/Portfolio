@@ -48,6 +48,15 @@ const projects = [
     buttontext: 'Visit Site',
     tags: ['React', 'GSAP', 'ScrollTrigger'],
   },
+  {
+    id: '6',
+    title: 'Milton Bottle 3D',
+    description: 'A 3D animated interactive website showcasing a Milton bottle.',
+    image: '/images/image.png',
+    link: 'https://miltonbottell.netlify.app/',
+    buttontext: 'Visit Site',
+    tags: ['3D', 'Animation', 'Web Design'],
+  },
 ];
 
 const Worksection = () => {
