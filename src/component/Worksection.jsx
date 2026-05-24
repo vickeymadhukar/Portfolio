@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Works from './Works';
 import { useScrollReveal } from '../useScrollReveal';
 
@@ -11,6 +11,7 @@ const projects = [
     link: 'https://dreadhall.netlify.app/',
     buttontext: 'Visit Game Site',
     tags: ['Unity', 'C#', 'Photon', 'Horror'],
+    category: 'Game Development',
   },
   {
     id: '2',
@@ -20,6 +21,7 @@ const projects = [
     link: 'https://bright-bubblegum-e356b3.netlify.app/',
     buttontext: 'Visit Game Site',
     tags: ['Unity', 'C#', 'Multiplayer'],
+    category: 'Game Development',
   },
   {
     id: '3',
@@ -29,15 +31,17 @@ const projects = [
     link: 'https://vickeymadhukar.github.io/CAN-lauch-site/',
     buttontext: 'Visit Site',
     tags: ['HTML', 'CSS', 'JavaScript', 'GSAP'],
+    category: 'Frontend',
   },
   {
     id: '4',
-    title: 'BMW New Launch',
-    description: 'An elegant and interactive frontend design to highlight newly launched cars with captivating animations.',
-    image: '/images/carfront.png',
-    link: 'https://vickeymadhukar.github.io/CAR-showcase-site/',
+    title: 'BMW XI Showcase',
+    description: 'A cinematic BMW XI automotive experience built with React.js, GSAP, and Tailwind CSS — featuring immersive scroll-driven animations, dramatic car reveals, and a premium luxury UI that brings the thrill of the road to life.',
+    image: '/images/carthumnail.png',
+    link: 'https://bmwxi.netlify.app/',
     buttontext: 'Visit Site',
-    tags: ['HTML', 'CSS', 'JavaScript', 'GSAP'],
+    tags: ['React.js', 'GSAP', 'Tailwind CSS'],
+    category: 'Frontend',
   },
   {
     id: '5',
@@ -47,6 +51,7 @@ const projects = [
     link: 'https://vickeymadhukar.github.io/Platinum_Credit_cardsite/',
     buttontext: 'Visit Site',
     tags: ['React', 'GSAP', 'ScrollTrigger'],
+    category: 'Frontend',
   },
   {
     id: '6',
@@ -56,11 +61,29 @@ const projects = [
     link: 'https://miltonbottell.netlify.app/',
     buttontext: 'Visit Site',
     tags: ['3D', 'Animation', 'Web Design'],
+    category: 'Frontend',
+  },
+  {
+    id: '7',
+    title: 'AiCollaborator',
+    description: 'An AI-powered chat application for smarter real-time collaboration, coding, and brainstorming.',
+    image: '/images/aicollaborator.png',
+    link: 'https://aicollaborator-1.onrender.com/',
+    buttontext: 'Visit Site',
+    tags: ['MongoDB', 'Express', 'React', 'Node.js'],
+    category: 'MERN',
   },
 ];
 
+const categories = ['All', 'Frontend', 'MERN', 'Game Development'];
+
 const Worksection = () => {
   const sectionRef = useScrollReveal();
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const filteredProjects = activeCategory === 'All'
+    ? projects
+    : projects.filter(project => project.category === activeCategory);
 
   return (
     <div className="section-container" ref={sectionRef} style={{ background: 'var(--bg-secondary)' }}>
@@ -74,8 +97,32 @@ const Worksection = () => {
         </p>
       </div>
 
+      <div className="project-categories reveal-item" style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '30px', flexWrap: 'wrap' }}>
+        {categories.map(category => (
+          <button
+            key={category}
+            className={`category-btn ${activeCategory === category ? 'active' : ''}`}
+            onClick={() => setActiveCategory(category)}
+            style={{
+              padding: '8px 24px',
+              borderRadius: '30px',
+              border: activeCategory === category ? '1px solid #fff' : '1px solid rgba(255, 255, 255, 0.1)',
+              background: activeCategory === category ? '#fff' : 'rgba(255, 255, 255, 0.05)',
+              color: activeCategory === category ? '#000' : 'rgba(255, 255, 255, 0.7)',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              fontWeight: '600',
+              outline: 'none',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
       <div className="projects-grid" style={{ marginTop: '48px' }}>
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <Works key={project.id} {...project} />
         ))}
       </div>

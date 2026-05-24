@@ -3,7 +3,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const Works = ({ title, description, image, link, tags = [] }) => {
   return (
-    <div className="project-card reveal-item">
+    <div className="project-card" style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
       <div className="project-image">
         <img src={image} alt={title} loading="lazy" />
         <div className="project-overlay">
