@@ -41,7 +41,7 @@ const skillCards = [
   },
   {
     title: 'Web Backend',
-    icon: '🟩',
+    icon: '⚙️',
     skills: ['Node.js', 'Express', 'MongoDB', 'REST API'],
     color: '#10b981',
   },
