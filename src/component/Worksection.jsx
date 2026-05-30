@@ -4,26 +4,6 @@ import { useScrollReveal } from '../useScrollReveal';
 
 const projects = [
   {
-    id: '1',
-    title: 'Dread Hall',
-    description: 'A dark multiplayer horror game set inside a haunted haveli where survival means eliminating others.',
-    image: '/images/dreadhall.png',
-    link: 'https://dreadhall.netlify.app/',
-    buttontext: 'Visit Game Site',
-    tags: ['Unity', 'C#', 'Photon', 'Horror'],
-    category: 'Game Development',
-  },
-  {
-    id: '2',
-    title: 'Tank Strike',
-    description: 'An interactive tank combat game with smooth animations and engaging gameplay mechanics.',
-    image: '/images/tanskpage.png',
-    link: 'https://bright-bubblegum-e356b3.netlify.app/',
-    buttontext: 'Visit Game Site',
-    tags: ['Unity', 'C#', 'Multiplayer'],
-    category: 'Game Development',
-  },
-  {
     id: '3',
     title: 'Fanta Landing Page',
     description: 'A clean and modern animated website to showcase new product launches with smooth GSAP animations.',
@@ -92,6 +72,26 @@ const projects = [
     buttontext: 'Visit Site',
     tags: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'EJS'],
     category: 'MERN',
+  },
+  {
+    id: '1',
+    title: 'Dread Hall',
+    description: 'A dark multiplayer horror game set inside a haunted haveli where survival means eliminating others.',
+    image: '/images/dreadhall.png',
+    link: 'https://dreadhall.netlify.app/',
+    buttontext: 'Visit Game Site',
+    tags: ['Unity', 'C#', 'Photon', 'Horror'],
+    category: 'Game Development',
+  },
+  {
+    id: '2',
+    title: 'Tank Strike',
+    description: 'An interactive tank combat game with smooth animations and engaging gameplay mechanics.',
+    image: '/images/tanskpage.png',
+    link: 'https://bright-bubblegum-e356b3.netlify.app/',
+    buttontext: 'Visit Game Site',
+    tags: ['Unity', 'C#', 'Multiplayer'],
+    category: 'Game Development',
   },
 ];
 

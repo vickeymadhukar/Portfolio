@@ -12,7 +12,7 @@ const About = () => {
   ];
 
   const info = [
-    { icon: <FaBriefcase />, label: 'Role', value: 'Game & Web Developer' },
+    { icon: <FaBriefcase />, label: 'Role', value: 'Fullstack & Game Developer' },
     { icon: <FaGraduationCap />, label: 'Education', value: 'B.Tech / CS Student' },
     { icon: <FaMapMarkerAlt />, label: 'Location', value: 'India' },
     { icon: <FaEnvelope />, label: 'Email', value: 'vikasmadhukar1430@gmail.com' },
@@ -30,13 +30,13 @@ const About = () => {
       <div className="about-grid" style={{ marginTop: '48px' }}>
         <div className="about-text reveal-item">
           <p>
-            I'm a passionate developer specializing in <strong style={{ color: 'var(--accent-cyan)' }}>game development</strong> and <strong style={{ color: 'var(--accent-purple)' }}>web development</strong>, with a strong interest in building immersive and interactive digital experiences.
+            I'm a passionate developer specializing as a <strong style={{ color: 'var(--accent-purple)' }}>Fullstack Web Developer</strong> and expanding my expertise into <strong style={{ color: 'var(--accent-cyan)' }}>Game Development</strong>. I have a strong interest in building immersive and interactive digital experiences.
           </p>
           <p>
-            Whether it's developing intense multiplayer FPS games using Unity and Photon, designing eerie environments for horror games, or crafting modern responsive web interfaces with React, Tailwind, and Node.js — I love turning ideas into engaging user experiences.
+            On the web, I craft modern, responsive, and scalable fullstack applications using technologies like React, Node.js, Express, and MongoDB. I love building robust architectures, dynamic UIs with GSAP/Tailwind, and ensuring seamless user experiences from frontend to backend.
           </p>
           <p>
-            I'm also skilled in UI/UX design, AR/VR/MR development, and animation, making me a versatile developer who can handle both the creative and technical side of any project.
+            In game development, I create intense multiplayer FPS games and immersive environments using Unity and C#. Alongside this, my skills in UI/UX design and AR/VR/MR development allow me to handle both the creative and technical sides of diverse projects.
           </p>
 
           <div className="about-stats">

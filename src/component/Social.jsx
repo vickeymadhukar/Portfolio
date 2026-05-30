@@ -6,7 +6,7 @@ import { SiItchdotio } from 'react-icons/si';
 const socials = [
   { icon: <FaGithub />, href: 'https://github.com/vickeymadhukar', label: 'GitHub', hoverColor: '#8b949e' },
   { icon: <FaLinkedin />, href: 'https://www.linkedin.com/in/vikas-madhukar-87a212243/', label: 'LinkedIn', hoverColor: '#0a66c2' },
-  { icon: <FaInstagram />, href: 'https://instagram.com/vickeymadhukar', label: 'Instagram', hoverColor: '#e4405f' },
+  { icon: <FaInstagram />, href: 'https://www.instagram.com/vickeymadhukar?utm_source=qr&igsh=MWV3ZmhpOGpvb3JkZg==', label: 'Instagram', hoverColor: '#e4405f' },
   { icon: <MdEmail />, href: 'mailto:vikasmadhukar1430@gmail.com', label: 'Email', hoverColor: '#ea4335' },
   { icon: <SiItchdotio />, href: 'https://vickeymadhukar.itch.io/', label: 'Itch.io', hoverColor: '#fa5c5c' },
 ];
