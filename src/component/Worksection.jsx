@@ -93,6 +93,16 @@ const projects = [
     tags: ['Unity', 'C#', 'Multiplayer'],
     category: 'Game Development',
   },
+  {
+    id: '10',
+    title: 'Retro Style Site',
+    description: 'A retro-themed website built with HTML, CSS, and JavaScript.',
+    image: '/images/retrostyle.png',
+    link: 'https://vickeymadhukar.github.io/RestroStyleSite/',
+    buttontext: 'Visit Site',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    category: 'Frontend',
+  },
 ];
 
 const categories = ['All', 'Frontend', 'MERN', 'Game Development'];
