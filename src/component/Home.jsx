@@ -70,7 +70,7 @@ const Home = () => {
           <div className="hero-role">
             <span style={{ color: 'var(--text-secondary)' }}>
               <Typewriter
-                words={['Game Developer', 'Web Developer', 'UI/UX Designer', 'Game Designer', 'Creative Coder']}
+                words={['Game Developer', 'Web Developer', 'UI/UX Designer', 'Game Designer', 'AR/VR/MR Developer', 'Creative Coder']}
                 loop={true}
                 cursor
                 cursorStyle="|"
