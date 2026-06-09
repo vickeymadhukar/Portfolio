@@ -94,6 +94,16 @@ const projects = [
     category: 'Game Development',
   },
   {
+    id: '11',
+    title: 'LexAR',
+    description: 'An Augmented Reality app that digitizes NCERT textbooks, bringing science lessons to life for students through immersive AR experiences — point your camera at a page and watch concepts come alive in 3D.',
+    image: '/images/LexAr.jpeg',
+    link: 'https://github.com/vickeymadhukar/LexAR',
+    buttontext: 'View on GitHub',
+    tags: ['Unity', 'Vuforia', 'AR', 'C#', 'EdTech'],
+    category: 'Game Development',
+  },
+  {
     id: '10',
     title: 'Retro Style Site',
     description: 'A retro-themed website built with HTML, CSS, and JavaScript.',
