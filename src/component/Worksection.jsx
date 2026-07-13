@@ -44,6 +44,16 @@ const projects = [
     category: 'Frontend',
   },
   {
+    id: '12',
+    title: 'ProjBazar',
+    description: 'A full-stack project marketplace with image/video uploads, advanced search, and category-based filtering. Features real-time messaging via Socket.io with private rooms, unread badge notifications, JWT authentication with HttpOnly cookies, role-based access control (buyer/seller/admin), and a Cloudinary abstraction layer for media uploads.',
+    image: '/images/ProjBazzar2.png',
+    link: 'https://projbazar-1.onrender.com/',
+    buttontext: 'Visit Site',
+    tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'WebSockets', 'Redis', 'Socket.io', 'Cloudinary'],
+    category: 'MERN',
+  },
+  {
     id: '7',
     title: 'AiCollaborator',
     description: 'An AI-powered chat application for smarter real-time collaboration, coding, and brainstorming.',
