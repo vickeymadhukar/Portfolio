@@ -3,7 +3,6 @@ import Home from './component/Home'
 import About from './component/About'
 import Worksection from './component/Worksection'
 import Skills from './component/Skills'
-import GameSection from './component/GameSection'
 import Contact from './component/Contact'
 
 const Oneplace = () => {
@@ -20,9 +19,6 @@ const Oneplace = () => {
       </section>
       <section id="projects">
         <Worksection />
-      </section>
-      <section id="games">
-        <GameSection />
       </section>
       <section id="contact">
         <Contact />

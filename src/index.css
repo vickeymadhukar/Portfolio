@@ -852,6 +852,46 @@ main, section {
   margin-top: 48px;
 }
 
+/* Video sub-section inside Game Dev tab */
+.game-videos-section {
+  margin-top: 64px;
+  animation: gameVideosFadeIn 0.5s ease forwards;
+}
+@keyframes gameVideosFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.game-videos-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.game-videos-divider::before,
+.game-videos-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+.game-videos-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.game-videos-sub {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
 /* ---- Game Card ---- */
 .game-card {
   background: var(--glass-bg);
