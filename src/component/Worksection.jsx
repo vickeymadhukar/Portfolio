@@ -161,6 +161,16 @@ const gameVideos = [
     duration: 'Short · WIP',
     isShort: true,
   },
+  {
+    id: 'g4',
+    title: 'Dread Hall – Gameplay Short',
+    description: 'A quick look at Dread Hall in action — a dark multiplayer horror game set inside a haunted haveli. Experience the atmosphere, tension and survival mechanics up close.',
+    youtubeId: 'ujEYYi5ptvc',
+    thumbnail: `https://img.youtube.com/vi/ujEYYi5ptvc/maxresdefault.jpg`,
+    tags: ['Unity', 'C#', 'Photon', 'Horror', 'Multiplayer'],
+    duration: 'Short · Gameplay',
+    isShort: true,
+  },
 ];
 
 const categories = ['All', 'Frontend', 'MERN', 'Game Development'];
