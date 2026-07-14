@@ -841,3 +841,323 @@ main, section {
   .hero-actions { flex-direction: column; width: 100%; align-items: center; }
   .glow-btn { width: 100%; justify-content: center; }
 }
+
+/* ============================================================
+   GAME SECTION
+   ============================================================ */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+/* ---- Game Card ---- */
+.game-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(.25,.8,.25,1), box-shadow 0.35s ease, border-color 0.3s ease;
+  position: relative;
+}
+.game-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 60px rgba(200,255,0,0.12), 0 4px 24px rgba(0,0,0,0.5);
+  border-color: rgba(200,255,0,0.35);
+}
+
+/* Thumbnail wrapper */
+.game-thumb-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #000;
+}
+.game-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.game-card:hover .game-thumb {
+  transform: scale(1.07);
+}
+
+/* Gradient overlay */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.6) 100%);
+  transition: background 0.3s ease;
+}
+.game-overlay.hovered {
+  background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.75) 100%);
+}
+
+/* Play button */
+.game-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(200,255,0,0.15);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  backdrop-filter: blur(8px);
+}
+.game-play-btn.hovered {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* YouTube badge */
+.game-yt-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(6px);
+}
+
+/* Card info block */
+.game-info {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.game-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.game-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.game-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.game-duration {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.game-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.game-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.18);
+  letter-spacing: 0.03em;
+}
+
+/* Watch button */
+.game-watch-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid rgba(255,0,0,0.4);
+  color: #ff4444;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: fit-content;
+  margin-top: 4px;
+}
+.game-watch-btn:hover,
+.game-card:hover .game-watch-btn {
+  background: rgba(255,0,0,0.12);
+  border-color: #ff4444;
+  box-shadow: 0 0 16px rgba(255,0,0,0.2);
+}
+
+/* ============================================================
+   YOUTUBE MODAL
+   ============================================================ */
+.yt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: yt-fade-in 0.25s ease;
+}
+@keyframes yt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.yt-modal-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 40px rgba(200,255,0,0.06);
+  animation: yt-slide-up 0.3s cubic-bezier(.25,.8,.25,1);
+}
+@keyframes yt-slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Modal header */
+.yt-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.yt-modal-title {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  gap: 4px;
+}
+.yt-modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.yt-modal-close:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-primary);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* Video embed */
+.yt-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+.yt-video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Modal footer */
+.yt-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--glass-border);
+}
+.yt-footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.yt-open-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255,0,0,0.4);
+  color: #ff4444;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.yt-open-btn:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: #ff4444;
+  box-shadow: 0 0 16px rgba(255, 0, 0, 0.2);
+}
+
+/* ---- YouTube Shorts modal (vertical 9:16) ---- */
+.yt-modal-short {
+  max-width: 400px;
+}
+.yt-video-wrapper-short {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9/16;
+  background: #000;
+  max-height: 70vh;
+}
+.yt-video-wrapper-short iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .games-grid { grid-template-columns: 1fr; gap: 20px; }
+  .yt-modal-box { border-radius: 14px; }
+  .yt-modal-header { padding: 12px 14px; }
+  .yt-modal-footer { padding: 10px 14px; }
+  .yt-modal-title { font-size: 0.82rem; }
+}
